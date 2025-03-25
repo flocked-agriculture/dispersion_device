@@ -1,0 +1,81 @@
+[component]
+uuid = "123e4567-e89b-12d3-a456-426614174000"
+type = "sprayer"  # sprayer, spreader, atomizer, 
+capacity = 1.234 # liters
+x_offset = 1.2 # meters
+y_offset = 2.3 # meters
+z_offset = 3.4 # meters
+pressure_min = 1.0 # pascals
+pressure_max = 2.0 # pascals
+dispersion_rate_min = 1.0 # liters per min or kg per min (depending on the type)
+dispersion_rate_max = 2.0 # liters per min or kg per min (depending on the type)
+droplet_size_min = 1.0 # microns (only for atomizer)
+droplet_size_max = 2.0 # microns (only for atomizer)
+
+
+[communication]
+
+[communication.mavlink] # some mavlink specific params, optional
+system_id = nan
+component_id = 1
+protocol_version = 2  # 1 or 2
+connection_string = "serial:/dev/ttyUSB0:115200"  # "udp:1.1.1.1/1234"
+
+# TODO: add publish rates per message
+
+# system logs (stdout, stderr)
+[logging]
+enable = true
+level = 3  # 1: error, 2: warning, 3: info, 4: debug, 5: trace
+
+# job critical application information (.mav, .tlog)  TODO: make human readable name
+[telemetry_logging]
+enable = true
+log_format = "mav" # "mav" or "tlog"
+log_path = "/path/to/log"
+
+
+[[subcomponents]]
+id = 1
+x_offset = 1.2 # meters
+y_offset = 2.3 # meters
+z_offset = 3.4 # meters
+# TODO: add orientation?
+swath_width_percentage = 10.0 # percentage of the total width
+
+pressure_min = 1.0 # pascals
+pressure_max = 2.0 # pascals
+dispersion_rate_min = 1.0 # liters per min or kg per min (depending on the type)
+dispersion_rate_max = 2.0 # liters per min or kg per min (depending on the type)
+droplet_size_min = 1.0 # microns (only for atomizer)
+droplet_size_max = 2.0 # microns (only for atomizer)
+
+dispersion_rate_control = { id = "SomeCorpModelNumber", interface = "CAN", address = 0x04, calibration_multiplier = 1.0, calibration_offset = 0.0 }
+
+flow_rate_sensor = { id = "SomeCorpModelNumber", interface = "i2c", address = 0x01, calibration_multiplier = 1.0, calibration_offset = 0.0 }  # optional
+pressure_sensor = { id = "SomeCorpModelNumber", interface = "adc", address = 0x02, calibration_multiplier = 1.0, calibration_offset = 0.0 } # optional
+
+atomizer = { id = "SomeCorpModelNumber", interface = "pwm", address = 0x03, calibration_multiplier = 1.0, calibration_offset = 0.0 } # optional
+
+
+[[subcomponents]]
+id = 2
+x_offset = 1.2 # meters
+y_offset = 2.3 # meters
+z_offset = 3.4 # meters
+# TODO: add orientation?
+swath_width_percentage = 10.0 # percentage of the total width
+
+pressure_min = 1.0 # pascals
+pressure_max = 2.0 # pascals
+dispersion_rate_min = 1.0 # liters per min or kg per min (depending on the type)
+dispersion_rate_max = 2.0 # liters per min or kg per min (depending on the type)
+droplet_size_min = 1.0 # microns (only for atomizer)
+droplet_size_max = 2.0 # microns (only for atomizer)
+
+dispersion_rate_control = { id = "SomeCorpModelNumber", interface = "CAN", address = 0x04, calibration_multiplier = 1.0, calibration_offset = 0.0 }
+
+flow_rate_sensor = { id = "SomeCorpModelNumber", interface = "i2c", address = 0x01, calibration_multiplier = 1.0, calibration_offset = 0.0 }  # optional
+pressure_sensor = { id = "SomeCorpModelNumber", interface = "adc", address = 0x02, calibration_multiplier = 1.0, calibration_offset = 0.0 } # optional
+
+atomizer = { id = "SomeCorpModelNumber", interface = "pwm", address = 0x03, calibration_multiplier = 1.0, calibration_offset = 0.0 } # optional
